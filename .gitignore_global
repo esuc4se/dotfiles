@@ -1,0 +1,11 @@
+*.swp
+*~
+*.idea
+.python-version
+my_gitignored/
+_my_gitignored/
+__pycache__/
+.DS_Store
+.cache/
+.rsync_excluded
+
