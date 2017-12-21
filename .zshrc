@@ -215,8 +215,18 @@ alias gpl='git pull'
 alias gs='git status'
 alias gref='git reflog'
 
+# シェル再起動
+alias relogin='exec $SHELL -l'
 
+# zcompdump絶対殺す
+# zcompkill後，relogin
+function zcompkill(){
+  rm ~/.zcompdump;
+  rm ~/.zcompdump.zwc;
+  rm /usr/local/opt/zplug/zcompdump;
+}
 
+alias zcompkill=zcompkill
 # C で標準出力をクリップボードにコピーする
 # mollifier delta blog : http://mollifier.hatenablog.com/entry/20100317/p1
 if which pbcopy >/dev/null 2>&1 ; then
