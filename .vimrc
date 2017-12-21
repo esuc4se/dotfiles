@@ -75,3 +75,8 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 " コメントアウトの色を変更
 :hi Comment ctermfg=gray
+
+syntax enable
+set background=dark
+colorscheme solarized
+
