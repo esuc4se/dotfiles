@@ -37,7 +37,7 @@ zplug "zsh-users/zsh-completions", defer:2
 zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:2
-# # zplug "sorin-ionescu/prezto"
+# zplug "sorin-ionescu/prezto"
 zplug load
 
 bindkey '^[[A' history-substring-search-up
@@ -227,6 +227,7 @@ function zcompkill(){
 }
 
 alias zcompkill=zcompkill
+
 # C で標準出力をクリップボードにコピーする
 # mollifier delta blog : http://mollifier.hatenablog.com/entry/20100317/p1
 if which pbcopy >/dev/null 2>&1 ; then
@@ -254,5 +255,8 @@ case ${OSTYPE} in
         alias ls='ls -F --color=auto'
         ;;
 esac
+
+# zsh起動時にtmux起動
+# [[ -z "$TMUX" && ! -z "$PS1" ]] && exec tmux
 
 # vim:set ft=zsh:
