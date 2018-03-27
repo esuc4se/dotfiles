@@ -69,14 +69,28 @@ set clipboard+=unnamed
 " インサートモードの時に C-j でノーマルモードに戻る
 imap <C-j> <esc>
 
-" ２回esc を押したら検索のハイライトをヤメる
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
-" }}}
-
 " コメントアウトの色を変更
 :hi Comment ctermfg=gray
 
 syntax enable
 set background=dark
 colorscheme solarized
+
+" dein
+" if &compatible
+"   set nocompatible
+" endif
+" 
+" set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+" 
+" call dein#begin(expand('~/.vim/dein'))
+" 
+" call dein#add('Shougo/dein.vim')
+" call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+" 
+" call dein#add('Shougo/neocomplete.vim')
+" call dein#add('Shougo/neomru.vim')
+" call dein#add('Shougo/neosnippet')
+" 
+" call dein#end()
 

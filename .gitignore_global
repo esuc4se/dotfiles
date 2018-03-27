@@ -8,4 +8,7 @@ __pycache__/
 .DS_Store
 .cache/
 .rsync_excluded
+.vscode
+*.code-workspace
+.mypy_cache/
 

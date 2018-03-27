@@ -9,3 +9,7 @@
 [user]
 	name = rias-z
 	email = chestermx88@gmail.com
+# [merge]
+# 	ff = false
+# [pull]
+# 	ff = only
