@@ -7,9 +7,10 @@
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [user]
-	name = rias-z
-	email = chestermx88@gmail.com
-# [merge]
-# 	ff = false
-# [pull]
-# 	ff = only
+	name = esuc4se
+	email = esucase@gmail.com
+[merge]
+	ff = false
+[pull]
+	ff = only
+
