@@ -1,25 +1,28 @@
+########################################
 # env
+## general
 export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME=$HOME/dotfiles/config
 alias brew="env PATH=${PATH/\/Users\/ryosuke\/\.pyenv\/shims:/} brew"
 
+########################################
+# develop env
+#
+## yarn (unsused?)
+# export PATH="$HOME/.yarn/bin:$PATH"
 
-# develop
-## node
-export PATH=$PATH:./node_modules/.bin
-
-## rvm
-# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+## nodebrew
+# export PATH=$HOME/.nodebrew/current/bin:$PATH
+NODEBREW_HOME=/usr/local/var/nodebrew/current
+export NODEBREW_HOME
+export NODEBREW_ROOT=/usr/local/var/nodebrew
+export PATH=$PATH:$NODEBREW_HOME/bin
 
 ## pyenv
 export PYENV_ROOT=$HOME/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-
-## emacs 風キーバインドにする
-# bindkey -e
-
 
 ########################################
 # zsh
@@ -66,28 +69,12 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
-## old_prompt
-# PROMPT="%~ %# "
-# PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
-
 ## ls色設定
 export LSCOLORS=gxfxcxdxbxegedabagacag
 export LS_COLORS='di=36;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;46'
 
 ## 補完候補もLS_COLORSに合わせて色が付くようにする
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-
-## lsがカラー表示になるようエイリアスを設定
-# case "${OSTYPE}" in
-# darwin*)
-#   # Mac
-#   alias ls="ls -GF"
-#   ;;
-# linux*)
-#   # Linux
-#   alias ls='ls -F --color'
-#   ;;
-# esac
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
@@ -122,10 +109,10 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 # vcs_info
 # autoload -Uz vcs_info
 # autoload -Uz add-zsh-hook
-# 
+#
 # zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
 # zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
-# 
+#
 # function _update_vcs_info_msg() {
 #     LANG=en_US.UTF-8 vcs_info
 #     RPROMPT="${vcs_info_msg_0_}"
@@ -203,8 +190,12 @@ alias ga='git add .'
 alias gcm='git commit -m'
 alias gcom='git commit -m'
 alias gca='git commit --amend'
-alias gcoa='git commit --amend'
-alias gri='git rebase -i'
+alias gcab='git reset --soft HEAD@{1]'
+alias gcar='git reset --soft HEAD@{1]'
+
+alias grs='(){ git reset --soft }'
+alias grh='(){ git reset --hard }'
+
 alias gb='git branch'
 alias gbd='git branch -d'
 alias gbD='git branch -D'
@@ -214,7 +205,11 @@ alias gps='git push'
 alias gph='git push'
 alias gpl='git pull'
 alias gs='git status'
-alias gref='git reflog'
+
+# yarn
+alias yu='yarn upgrade-interactive'
+alias nu='npm-check -u'
+alias nug='npm-check -u -g'
 
 # シェル再起動
 alias relogin='exec $SHELL -l'
