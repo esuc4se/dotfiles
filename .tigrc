@@ -1,3 +1,6 @@
+#########################################################
+## display
+
 # main view の左端にコミットIDを表示する
 set main-view = id date author commit-title:graph=yes,refs=yes
 
@@ -11,14 +14,8 @@ set log-view    = line-number:yes,interval=1 text
 set blob-view   = line-number:yes,interval=1 text
 set diff-view   = line-number:yes,interval=1 text:yes,commit-title-overflow=no
 
-# 画面を垂直方向に分割する
-# set vertical-split = yes
-
 # 横分割に強制する
 set vertical-split = no
-
-# 空白無視
-# set ignore-space = all
 
 # 空白無視 (status-view では表示するが diff-view では無視する) (W でトグル)
 set ignore-space = at-eol
@@ -40,32 +37,44 @@ set editor-line-number = yes
 
 # リフレッシュするタイミング
 set refresh-mode = auto
-#set refresh-mode = after-command
-#set refresh-mode = periodic
-#set refresh-interval = 1
 
 # 差分表示に diff-highlight を使う
-# set diff-highlight = true
+set diff-highlight = true
 
 
-# bind
-# g をファイル先頭に移動に変更、 view-grep を再割当て
+#########################################################
+## keybind
+
+# disable
+bind main F         none
+
+# vim keybind
 bind generic g      move-first-line
+bind generic G      move-last-line
+bind main G         move-last-line
+
 bind generic E      view-grep
 
-# G でファイル末尾に移動 (default: :toggle commit-title-graph)
-bind generic G      move-last-line
-bind main    G      move-last-line
-
-# c でコミットにチェックアウト
-bind main c !@?git checkout %(commit)
-
-# C でコミットのハッシュ値をクリップボードにコピー
+# コミットのハッシュ値をコピー
 bind main C !@zsh -c "echo -n %(commit) | pbcopy"
-# bind main C !@git pbcopy %(commit)
 
-bind status + !git commit --amend
-bind status D !@?git checkout HEAD -- %(file)
+# cherry-pick
+bind main p !git cherry-pick %(commit)
+bind main P !git cherry-pick %(commit)
+
+# rebase
 bind diff R !git rebase -i %(commit)
 bind main R !git rebase -i %(commit)
 
+# refresh
+bind generic <Ctrl-r> refresh
+bind generic <Ctrl-g> refresh
+
+bind status + !git commit --amend
+
+bind status D !@?git checkout HEAD -- %(file)
+
+# checkout
+bind main c !@?git checkout %(commit)
+bind refs c !git checkout %(branch)
+bind refs C !git checkout %(branch)
