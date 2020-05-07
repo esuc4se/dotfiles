@@ -206,6 +206,10 @@ alias gph='git push'
 alias gpl='git pull'
 alias gs='git status'
 
+# ghq
+alias g='cd $(ghq root)/$(ghq list | peco)'
+alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+
 # yarn
 alias yu='yarn upgrade-interactive'
 alias nu='npm-check -u'
@@ -256,3 +260,4 @@ esac
 # [[ -z "$TMUX" && ! -z "$PS1" ]] && exec tmux
 
 # vim:set ft=zsh:
+
