@@ -55,9 +55,6 @@ bind main G         move-last-line
 
 bind generic E      view-grep
 
-# コミットのハッシュ値をコピー
-bind main C !@zsh -c "echo -n %(commit) | pbcopy"
-
 # cherry-pick
 bind main p !git cherry-pick %(commit)
 bind main P !git cherry-pick %(commit)
@@ -78,3 +75,9 @@ bind status D !@?git checkout HEAD -- %(file)
 bind main c !@?git checkout %(commit)
 bind refs c !git checkout %(branch)
 bind refs C !git checkout %(branch)
+
+# コミットのハッシュ値をコピー
+# bind main C !@zsh -c "echo -n %(commit) | pbcopy"
+bind main C !@bash -c "echo -n %(commit) | pbcopy"
+bind main y @bash -c "echo -n %(commit) | pbcopy"
+
