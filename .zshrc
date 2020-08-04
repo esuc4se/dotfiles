@@ -1,15 +1,13 @@
 ########################################
-# env
-## general
+# global
 export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME=$HOME/dotfiles/config
-alias brew="env PATH=${PATH/\/Users\/ryosuke\/\.pyenv\/shims:/} brew"
+
+## brewコマンド使用時、pyenvのpathを通らなくさせる
+alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
 
 ########################################
-# develop env
-#
-## yarn (unsused?)
-# export PATH="$HOME/.yarn/bin:$PATH"
+# dev
 
 ## nodebrew
 # export PATH=$HOME/.nodebrew/current/bin:$PATH

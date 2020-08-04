@@ -11,4 +11,5 @@ __pycache__/
 .vscode
 *.code-workspace
 .mypy_cache/
+.envrc
 
