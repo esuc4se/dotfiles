@@ -1,10 +1,7 @@
 # dotfiles
 
-- terminal
-    - .tmux
 - shell
     - zsh
-    - bash
 - git
     - tigrc
 -vim
