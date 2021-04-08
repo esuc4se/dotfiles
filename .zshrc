@@ -1,60 +1,42 @@
 ########################################
-# settings
-
-# zplug
-export ZPLUG_HOME=/usr/local/opt/zplug
-
 # common
 export LANG=ja_JP.UTF-8
 
-# machine env
-case ${OSTYPE} in
-  darwin*)
-    # pyenv:
-    # !pb: homebrew + pyenv
-    alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
 
-    # dev: nodebrew
-    NODEBREW_HOME=/usr/local/var/nodebrew/current
-    export NODEBREW_HOME
-    export NODEBREW_ROOT=/usr/local/var/nodebrew
-    export PATH=$PATH:$NODEBREW_HOME/bin
-    ;;
-  linux*)
-    ;;
-esac
+########################################
+# direnv
+export EDITOR=vim
+eval "$(direnv hook zsh)"
 
 
 ########################################
-# dev
-
-# pyenv
-if type pyenv >/dev/null 2>&1 ; then
-  export PYENV_ROOT=$HOME/.pyenv
-  export PATH=$PYENV_ROOT/bin:$PATH
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
+# node
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
 ########################################
-# zsh
+# shell
 
-# pure (propmt)
-fpath+=$HOME/.zsh/pure
-autoload -U promptinit; promptinit
+# zsh-completions
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
-if [ "`prompt -l | grep pure`" ] ; then
-  prompt pure
-fi
+    autoload -Uz compinit
+    compinit
+  fi
 
 # zplug
+export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
-## zsh completion
+
 zplug "zsh-users/zsh-completions", defer:2
 zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:2
+zplug mafredri/zsh-async, from:github
+zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 zplug load
 
 ## peco
@@ -86,7 +68,6 @@ function peco-src () {
 }
 zle -N peco-src
 bindkey '^]' peco-src
-
 
 ## history settings
 HISTFILE=~/.zsh_history
@@ -143,23 +124,25 @@ setopt extended_glob
 
 
 ########################################
+# kubernetes
+
+source <(kubectl completion zsh)
+
+source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+# PROMPT='$(kube_ps1) '$PROMPT
+PS1='$(kube_ps1)'$PS1
+
+alias k='kubectl'
+alias kauth='kubectl config set-credentials me --token="$(zms-cli -z https://zms-proxy.athenz.corp.yahoo.co.jp:4443/zms/v1 get-user-token | cut -d'\'' '\'' -f2)"'
+
+
+########################################
 # aliases
 
-# global aliases
+# global
 alias -g L='| less'
 alias -g G='| grep'
-
-## 'C' clipboard copy
-if which pbcopy >/dev/null 2>&1 ; then
-    # Mac
-    alias -g C='| pbcopy'
-elif which xsel >/dev/null 2>&1 ; then
-    # Linux
-    alias -g C='| xsel --input --clipboard'
-elif which putclip >/dev/null 2>&1 ; then
-    # Cygwin
-    alias -g C='| putclip'
-fi
+alias -g C='| pbcopy'
 
 # ls
 alias la='ls -al'
@@ -185,6 +168,8 @@ alias gpl='git pull'
 alias gs='git status'
 
 # ghq
+alias get='ghq get'
+alias create='ghq create'
 alias g='cd $(ghq root)/$(ghq list | peco)'
 alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
 

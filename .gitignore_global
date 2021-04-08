@@ -12,4 +12,6 @@ __pycache__/
 *.code-workspace
 .mypy_cache/
 .envrc
+node_modules/
+yarn-error.log
 
