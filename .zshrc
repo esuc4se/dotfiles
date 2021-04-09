@@ -172,6 +172,7 @@ alias get='ghq get'
 alias create='ghq create'
 alias g='cd $(ghq root)/$(ghq list | peco)'
 alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+alias gsee='hub browse .'
 
 # npm & yarn
 alias yu='yarn upgrade-interactive'
